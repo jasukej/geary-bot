@@ -2,10 +2,12 @@ import "dotenv/config";
 import pkg from "@slack/bolt";
 const { App } = pkg;
 import fs from "fs";
+import "./birthday.js";
 
 const roles = JSON.parse(fs.readFileSync("roles.json", "utf8"));
+const pingMap = new Map();
 
-const app = new App({
+export const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   socketMode: true, // set to false if calling URL
@@ -24,16 +26,6 @@ app.receiver.client.on("connected", () => {
 app.receiver.client.on("error", (error) => {
   console.error("Socket Mode connection error:", error);
 });
-
-app.receiver.client.on("slack_event", (eventType, event) => {
-  console.log(`Received event of type: ${eventType}`);
-});
-
-// Helper for parsing user groups
-function mentionsFor(role) {
-  if (!roles[role]) return null;
-  return roles[role].map((u) => `<@${u}>`).join(" ");
-}
 
 // Listens for messages containing role mentions e.g. @dev
 app.message(async ({ message, say }) => {
@@ -57,9 +49,22 @@ app.message(async ({ message, say }) => {
       .map((u) => `<@${u}>`)
       .join(" ");
     console.log(tagString);
-    await say({ text: `${tagString}`, thread_ts: message.ts });
+    const res = await say({ text: `${tagString}`, thread_ts: message.ts });
+    pingMap.set(`${message.channel}:${message.ts}`, res.ts);
   }
 });
+
+// Delete message if original message is deleted
+// app.event("message", async({ event, client }) => {
+//   if (event.subtype !== "message_deleted") return;
+
+//   const key = `${event.channel}:${event.deleted_ts}`;
+//   const pingTs = pingMap.get(key);
+//   if (!pingTs) return;
+
+//   await client.chat.delete({ channel: event.channel, ts: pingTs });
+//   pingMap.delete(key);
+// });
 
 // Start
 (async () => {
