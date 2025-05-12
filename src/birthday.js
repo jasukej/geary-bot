@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import { app } from "./index.js";
 import fs from "fs";
-import { zonedTimeToUtc, utcToZonedTime, format } from "date-fns-tz";
+import { format, formatInTimeZone } from "date-fns-tz";
 import { differenceInYears, parse } from "date-fns";
 
 const BIRTHDAY_CHANNEL_ID = "C08QZ3A0QSY"; 
@@ -22,7 +22,7 @@ const checkBirthdaysAndSendMessage = async () => {
     return;
   }
 
-  const nowPST = utcToZonedTime(new Date(), TIME_ZONE);
+  const nowPST = formatInTimeZone(new Date(), TIME_ZONE, "yyyy-MM-dd");
   const todayMonthDayPST = format(nowPST, "MM/dd", { timeZone: TIME_ZONE });
 
   console.log(`Checking for birthdays on ${todayMonthDayPST} (PST)`);
