@@ -40,6 +40,11 @@
         "slack_id": "U08RC8W1ZUH"
     },
     {
+        "name": "Elaine Li", 
+        "birthday": "10/25/2005",
+        "slack_id": "U08QXM8S8FP"
+    },
+    {
         "name": "Elisabeth Lau", 
         "birthday": "03/26/2005",
         "slack_id": "U061F645FLN"
@@ -93,5 +98,35 @@
         "name": "Fahim Gbonjula",
         "birthday": "04/22/2004",
         "slack_id": "U05313T5NKH"
+    },
+    {
+        "name": "William He",
+        "birthday": "11/17/2006",
+        "slack_id": "U07RU2LFM3J"
+    },
+    {
+        "name": "Chloe Cheung",
+        "birthday": "08/08/2005",
+        "slack_id": "U0736N8G6TX"
+    },
+    {
+        "name": "Herb Tan",
+        "birthday": "04/16/2004",
+        "slack_id": "U08QQTCLNG7"
+    },
+    {
+        "name": "Erin Chiu",
+        "birthday": "06/27/2004",
+        "slack_id": "U08R3BBNQR1"
+    },
+    {
+        "name": "Eileen Wang",
+        "birthday": "08/23/2006",
+        "slack_id": "U08R4FYA7R9"
+    },
+    {
+        "name": "Melissa Fong",
+        "birthday": "07/07/2000",
+        "slack_id": "U08QK9NAJB1"
     }
 ]
