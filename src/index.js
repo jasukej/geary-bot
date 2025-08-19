@@ -54,21 +54,7 @@ app.message(async ({ message, say }) => {
   }
 });
 
-// Delete message if original message is deleted
-// app.event("message", async({ event, client }) => {
-//   if (event.subtype !== "message_deleted") return;
-
-//   const key = `${event.channel}:${event.deleted_ts}`;
-//   const pingTs = pingMap.get(key);
-//   if (!pingTs) return;
-
-//   await client.chat.delete({ channel: event.channel, ts: pingTs });
-//   pingMap.delete(key);
-// });
-
-// Start
 (async () => {
-  // Start the app
   await app.start(process.env.PORT || 3000);
   console.log("Geary bot running");
 })();
